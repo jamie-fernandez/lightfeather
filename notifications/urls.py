@@ -1,7 +1,7 @@
-from django.urls import path
-from .views import ListNotification, DetailNotification
+from rest_framework.routers import SimpleRouter
+from .views import NotificationViewSet
 
-urlpatterns = [
-    path('<int:pk>/', DetailNotification.as_view()),
-    path('', ListNotification.as_view())
-]
+router = SimpleRouter()
+router.register('', NotificationViewSet)
+
+urlpatterns = router.urls

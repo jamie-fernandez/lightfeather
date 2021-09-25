@@ -1,14 +1,9 @@
-from rest_framework import generics
+from rest_framework import viewsets
 
 from .models import Notification
 from .serializers import NotificationSerializer
 
 
-class ListNotification(generics.ListCreateAPIView):
-    queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer
-
-
-class DetailNotification(generics.RetrieveUpdateDestroyAPIView):
+class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
