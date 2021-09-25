@@ -114,10 +114,16 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
+
+    <label for="notificationsTable"
+      >Notifications that have already been saved</label
+    >
+    <b-table id="notificationsTable" striped hover :items="notifications" />
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import { ValidationProvider } from "vee-validate";
 
 export default {
@@ -127,6 +133,7 @@ export default {
   },
   data() {
     return {
+      notifications: null,
       preference: null,
       form: {
         lastName: null,
@@ -143,7 +150,20 @@ export default {
       },
     };
   },
+  created() {
+    this.fetchNotifications();
+  },
   methods: {
+    fetchNotifications() {
+      axios
+        .get("http://0.0.0.0:8000/notifications/")
+        .then((response) => {
+          this.notifications = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     onSubmit(event) {
       event.preventDefault();
       const { firstName, lastName, email, phone, supervisor } = this.form;
