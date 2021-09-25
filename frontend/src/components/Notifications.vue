@@ -155,7 +155,7 @@ export default {
   methods: {
     fetchNotifications() {
       axios
-        .get("http://0.0.0.0:8000/notifications/")
+        .get("http://0.0.0.0:8000/api/notifications/")
         .then((response) => {
           this.notifications = response.data;
         })
