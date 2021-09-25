@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset">
+      <h2>Notification Form</h2>
       <b-form-group id="input-group-1" label="First Name:" label-for="input-1">
         <ValidationProvider
           name="first name"
@@ -115,9 +116,7 @@
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
 
-    <label for="notificationsTable"
-      >Notifications that have already been saved</label
-    >
+    <h2>Notifications that have already been saved</h2>
     <b-table id="notificationsTable" striped hover :items="notifications" />
   </div>
 </template>
