@@ -164,12 +164,7 @@ export default {
       axios
         .get("http://0.0.0.0:8000/api/supervisors/")
         .then((response) => {
-          this.supervisorOptions = response.data.map((manager) => {
-            return {
-              text: `${manager.jurisdiction} - ${manager.lastName}, ${manager.firstName}`,
-              value: `${manager.jurisdiction} - ${manager.lastName}, ${manager.firstName}`,
-            };
-          });
+          this.supervisorOptions = response.data;
         })
         .catch((error) => {
           console.log(error);
