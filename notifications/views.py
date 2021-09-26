@@ -7,3 +7,8 @@ from .serializers import NotificationSerializer
 class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
+
+    def create(self, request):
+        print(request.data)
+
+        return super().create(request)
