@@ -167,7 +167,7 @@ export default {
           this.supervisorOptions = response.data.map((manager) => {
             return {
               text: `${manager.jurisdiction} - ${manager.lastName}, ${manager.firstName}`,
-              value: manager.id,
+              value: `${manager.jurisdiction} - ${manager.lastName}, ${manager.firstName}`,
             };
           });
         })
@@ -177,7 +177,16 @@ export default {
     },
     onSubmit() {
       axios
-        .post("http://0.0.0.0:8000/api/submit/", this.form)
+        .post("http://0.0.0.0:8000/api/submit/", {
+          first_name: this.form.firstName,
+          last_name: this.form.lastName,
+          email: this.form.email,
+          phone: this.form.phone,
+          supervisor: this.form.supervisor,
+        })
+        .then(() => {
+          this.fetchNotifications();
+        })
         .catch((error) => {
           console.log(error);
         });
