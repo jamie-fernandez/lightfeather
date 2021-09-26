@@ -13,7 +13,7 @@ class SupervisorListView(viewsets.ViewSet):
                 continue
             else:
                 sorted_managers.append(
-                    f'{manager["jurisdiction"]} - {manager["firstName"]}, {manager["lastName"]}')
+                    f'{manager["jurisdiction"]} - {manager["lastName"]}, {manager["firstName"]}')
         return sorted_managers
 
     def list(self, request):
