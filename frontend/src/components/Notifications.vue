@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container w-50 mb-4">
     <b-form @submit.prevent="onSubmit" @reset.prevent="onReset">
       <h2>Notification Form</h2>
       <b-form-group id="input-group-1" label="First Name:" label-for="input-1">
@@ -117,8 +117,10 @@
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
 
-    <h2>Notifications that have already been saved</h2>
-    <b-table id="notificationsTable" striped hover :items="notifications" />
+    <div class="mt-5">
+      <h2>Notifications that have already been saved</h2>
+      <b-table id="notificationsTable" striped hover :items="notifications" />
+    </div>
   </div>
 </template>
 
@@ -190,4 +192,3 @@ export default {
   },
 };
 </script>
-
