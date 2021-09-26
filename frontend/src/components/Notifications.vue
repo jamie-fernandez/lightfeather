@@ -107,6 +107,7 @@
           id="input-5"
           v-model="form.supervisor"
           :options="form.supervisorOptions"
+          :select-size="10"
           ref="supervisor"
           required
         />
@@ -140,17 +141,13 @@ export default {
         email: null,
         phone: null,
         supervisor: null,
-        supervisorOptions: [
-          { text: "Select One", value: null },
-          "one",
-          "two",
-          "three",
-        ],
+        supervisorOptions: [],
       },
     };
   },
   created() {
     this.fetchNotifications();
+    this.fetchSupervisors();
   },
   methods: {
     fetchNotifications() {
@@ -158,6 +155,23 @@ export default {
         .get("http://0.0.0.0:8000/api/notifications/")
         .then((response) => {
           this.notifications = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    fetchSupervisors() {
+      axios
+        .get("http://0.0.0.0:8000/api/supervisors/")
+        .then((response) => {
+          this.form.supervisorOptions = response.data.map((manager) => {
+            return {
+              text: `${manager.jurisdiction} - ${manager.lastName}, ${manager.firstName}`,
+              value: manager.id,
+            };
+          });
+
+          console.log(this.supervisorOptions);
         })
         .catch((error) => {
           console.log(error);
