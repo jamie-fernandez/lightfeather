@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset">
+    <b-form @submit.prevent="onSubmit" @reset.prevent="onReset">
       <h2>Notification Form</h2>
       <b-form-group id="input-group-1" label="First Name:" label-for="input-1">
         <ValidationProvider
@@ -170,17 +170,17 @@ export default {
               value: manager.id,
             };
           });
-
-          console.log(this.supervisorOptions);
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    onSubmit(event) {
-      event.preventDefault();
-      const { firstName, lastName, email, phone, supervisor } = this.form;
-      console.log(firstName, lastName, email, phone, supervisor);
+    onSubmit() {
+      axios
+        .post("http://0.0.0.0:8000/api/submit/", this.form)
+        .catch((error) => {
+          console.log(error);
+        });
     },
     onReset() {},
   },
