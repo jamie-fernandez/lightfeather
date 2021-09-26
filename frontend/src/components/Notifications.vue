@@ -106,7 +106,7 @@
         <b-form-select
           id="input-5"
           v-model="form.supervisor"
-          :options="form.supervisorOptions"
+          :options="supervisorOptions"
           :select-size="10"
           ref="supervisor"
           required
@@ -135,13 +135,13 @@ export default {
     return {
       notifications: null,
       preference: null,
+      supervisorOptions: [],
       form: {
         lastName: null,
         firstName: null,
         email: null,
         phone: null,
         supervisor: null,
-        supervisorOptions: [],
       },
     };
   },
@@ -164,7 +164,7 @@ export default {
       axios
         .get("http://0.0.0.0:8000/api/supervisors/")
         .then((response) => {
-          this.form.supervisorOptions = response.data.map((manager) => {
+          this.supervisorOptions = response.data.map((manager) => {
             return {
               text: `${manager.jurisdiction} - ${manager.lastName}, ${manager.firstName}`,
               value: manager.id,
