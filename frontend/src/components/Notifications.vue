@@ -92,7 +92,6 @@
           <b-form-input
             id="input-4"
             v-model="form.phone"
-            type="tel"
             placeholder="Enter phone"
             ref="phone"
             autocomplete="off"
@@ -152,6 +151,19 @@ export default {
     this.fetchSupervisors();
   },
   methods: {
+    sortLastName() {
+      this.supervisorOptions.sort(function (first, second) {
+        let a = first.split("-")[1];
+        let b = second.split("-")[1];
+        if (a < b) {
+          return -1;
+        }
+        if (a > b) {
+          return 1;
+        }
+        return 0;
+      });
+    },
     fetchNotifications() {
       axios
         .get("http://0.0.0.0:8000/api/notifications/")
@@ -167,6 +179,7 @@ export default {
         .get("http://0.0.0.0:8000/api/supervisors/")
         .then((response) => {
           this.supervisorOptions = response.data;
+          this.sortLastName();
         })
         .catch((error) => {
           console.log(error);
@@ -178,7 +191,7 @@ export default {
           first_name: this.form.firstName,
           last_name: this.form.lastName,
           email: this.form.email,
-          phone: this.form.phone,
+          phone_number: this.form.phone,
           supervisor: this.form.supervisor,
         })
         .then(() => {
